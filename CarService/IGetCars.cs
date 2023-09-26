@@ -4,6 +4,6 @@ namespace CarService
 {
     public interface IGetCars
     {
-        Task<List<CarDTO>> GetCars(Filter filters);
+        Task<List<CarDTO>> GetCars(string filters);
     }
 }

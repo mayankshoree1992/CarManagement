@@ -12,7 +12,7 @@ namespace CarService
         {
             _carRepo = carRepo;
         }
-        public async Task<List<CarDTO>> GetCars(Filter filters)
+        public async Task<List<CarDTO>> GetCars(string filters)
         {
             var cars = await _carRepo.GetCars(filters);
             if (cars != null)

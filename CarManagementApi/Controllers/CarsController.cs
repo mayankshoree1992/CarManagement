@@ -26,7 +26,7 @@ namespace CarManagementApi.Controllers
         }
 
         [HttpGet("GetCars")]
-        public async Task<ActionResult<List<CarDTO>>> GetCars([FromQuery] Filter filters )
+        public async Task<ActionResult<List<CarDTO>>> GetCars(string filters)
         {
             var data = await _getCars.GetCars(filters);
             if (data == null || data.Count==0)
