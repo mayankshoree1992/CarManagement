@@ -1,0 +1,60 @@
+﻿@page "/"
+@using CarManagement.Data
+@inject WeatherForecastService ForecastService
+
+<PageTitle>Car Management</PageTitle>
+
+<h1>Car Management</h1>
+
+<p><button style="float:right" type="button" class="btn-primary">Add New Car</button></p>
+
+@*@if (cars == null)
+{
+    <p><em>Loading...</em></p>
+}*@
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Brand</th>
+                <th>Car Name</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Transmition</th>
+                <th>Fuel Type</th>
+                <th>Seat Capacity</th>
+                <th>Type</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in cars)
+            {
+                <tr>
+                    <td>@car.Id</td>
+                    <td>@car.Brand</td>
+                    <td>@car.CarName</td>
+                    <td>@car.Model</td>
+                    <td>@car.Color</td>
+                    <td>@car.Transmition</td>
+                    <td>@car.FuelType </td>
+                    <td>@car.SeatCapacity </td>
+                    <td>@car.BodyType</td>
+                    <td>@car.Price</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Car[]? cars;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //cars = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+    }
+}
