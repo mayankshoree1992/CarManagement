@@ -21,20 +21,22 @@ namespace CarRepository
         {
             var data = _DbContext.Cars.AsQueryable();
 
-            data = data.Where(x => x.CarName.ToLower().Contains(filters.ToLower()));
+            if (!string.IsNullOrEmpty(filters))
+            {
+                data = data.Where(x => x.CarName.ToLower().Contains(filters.ToLower()));
 
-            data = data.Where(x => x.Brand.ToLower().Contains(filters.ToLower()));
+                data = data.Where(x => x.Brand.ToLower().Contains(filters.ToLower()));
 
-            data = data.Where(x => x.Model.ToLower().Contains(filters.ToLower()));
+                data = data.Where(x => x.Model.ToLower().Contains(filters.ToLower()));
 
-            data = data.Where(x => x.Transmition.ToLower().Contains(filters.ToLower()));
+                data = data.Where(x => x.Transmition.ToLower().Contains(filters.ToLower()));
 
-            data = data.Where(x => x.FuelType.ToLower().Contains(filters.ToLower()));
+                data = data.Where(x => x.FuelType.ToLower().Contains(filters.ToLower()));
 
-            data = data.Where(x => x.SeatCapacity.ToLower().Contains(filters.ToLower()));
+                data = data.Where(x => x.SeatCapacity.ToLower().Contains(filters.ToLower()));
 
-            data = data.Where(x => x.Price.Equals(filters));
-
+                data = data.Where(x => x.Price.Equals(filters));
+            }
             return await data.ToListAsync();
         }
     }
