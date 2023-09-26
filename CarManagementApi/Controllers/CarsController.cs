@@ -18,14 +18,14 @@ namespace CarManagementApi.Controllers
             _getCars = getCars;
         }
 
-        [HttpPost]
-        public async Task<int> AddCar(CarDTO car)
+        [HttpPost("AddCar")]
+        public async Task<ActionResult> AddCar(CarDTO car)
         {
             var data = await _addCar.AddCar(car);
-            return data;
+            return Ok(data);
         }
 
-        [HttpGet]
+        [HttpGet("GetCars")]
         public async Task<ActionResult<List<CarDTO>>> GetCars([FromQuery] Filter filters )
         {
             var data = await _getCars.GetCars(filters);

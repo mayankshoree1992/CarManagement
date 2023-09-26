@@ -26,8 +26,8 @@ namespace CarService
                 SeatCapacity = carDTO.SeatCapacity,
                 Transmition = carDTO.Transmition
             };
-            var a =  await _carRepo.AddCar(car);
-            return a.Id;
+            var data =  await _carRepo.AddCar(car);
+            return data.Id;
         }
     }
 }

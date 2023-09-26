@@ -1,5 +1,6 @@
 ﻿using CarRepository;
 using CarModels;
+using System.Linq;
 
 namespace CarService
 {
@@ -16,32 +17,26 @@ namespace CarService
             var cars = await _carRepo.GetCars(filters);
             if (cars != null)
             {
-                List<CarDTO> result = new List<CarDTO>();
-
-                foreach (var car in cars)
-                {
-                    var carDTO = new CarDTO()
-                    {
-                        Id = car.Id,
-                        BodyType = car.BodyType,
-                        Brand = car.Brand,
-                        CarName = car.CarName,
-                        Color = car.Color,
-                        FuelType = car.FuelType,
-                        Model = car.Model,
-                        Price = car.Price,
-                        SeatCapacity = car.SeatCapacity,
-                        Transmition = car.Transmition
-                    };
-                    result.Add(carDTO);
-                }
-
-                return result;
+                return (from car in cars
+                        let carDTO = new CarDTO()
+                        {
+                            Id = car.Id,
+                            BodyType = car.BodyType,
+                            Brand = car.Brand,
+                            CarName = car.CarName,
+                            Color = car.Color,
+                            FuelType = car.FuelType,
+                            Model = car.Model,
+                            Price = car.Price,
+                            SeatCapacity = car.SeatCapacity,
+                            Transmition = car.Transmition
+                        }
+                        select carDTO).ToList();
             }
             else
             {
 
-                return null;
+               return new List<CarDTO>();
             }
         }
     }

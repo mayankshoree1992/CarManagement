@@ -1,0 +1,114 @@
+﻿@using Newtonsoft.Json;
+@using CarManagement.Data
+<EditForm Model="@car">
+    <h3>Add Car</h3>
+    <hr />
+    <div class="form-group row">
+        <label for="brand" class="col-sm-2 col-form-label">
+            First Name
+        </label>
+        <div class="col-sm-10">
+            <InputText id="brand" class="form-control" placeholder="Brand"
+            @bind-Value="car.Brand" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="carName" class="col-sm-2 col-form-label">
+            First Name
+        </label>
+        <div class="col-sm-10">
+            <InputText id="carName" class="form-control" placeholder="CarName"
+            @bind-Value="car.CarName" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">
+            Model
+        </label>
+        <div class="col-sm-10">
+            <InputText id="model" class="form-control" placeholder="model"
+            @bind-Value="car.Model" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="color" class="col-sm-2 col-form-label">
+            Color
+        </label>
+        <div class="col-sm-10">
+            <InputText id="color" class="form-control" placeholder="color"
+            @bind-Value="car.Color" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="transmition" class="col-sm-2 col-form-label">
+            Transmition
+        </label>
+        <div class="col-sm-10">
+            <InputText id="transmition" class="form-control" placeholder="transmition"
+            @bind-Value="car.Transmition" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="fuelType" class="col-sm-2 col-form-label">
+            FuelType
+        </label>
+        <div class="col-sm-10">
+            <InputText id="fuelType" class="form-control" placeholder="fuelType"
+            @bind-Value="car.FuelType" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="seatCapacity" class="col-sm-2 col-form-label">
+            SeatCapacity
+        </label>
+        <div class="col-sm-10">
+            <InputText id="seatCapacity" class="form-control" placeholder="seatCapacity"
+            @bind-Value="car.SeatCapacity" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="bodyType" class="col-sm-2 col-form-label">
+            BodyType
+        </label>
+        <div class="col-sm-10">
+            <InputText id="bodyType" class="form-control" placeholder="bodyType"
+            @bind-Value="car.BodyType" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="price" class="col-sm-2 col-form-label">
+            Price
+        </label>
+        <div class="col-sm-10">
+            <InputText id="price" class="form-control" placeholder="price"
+            @bind-Value="qtyString" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" @onclick="@(()=>InsertCar())">Add</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    Data.Car car = new Data.Car();
+    public string qtyString
+    {
+        get => car.Price.ToString();
+        set
+        {
+            if (Double.TryParse(value, out double val))
+                car.Price = val;
+        }
+    }
+
+    public async Task InsertCar()
+    {
+        var response = await CarDataService.HttpMethodCalls("Cars/AddCar", HttpMethod.Post, JsonConvert.SerializeObject(car));
+        if (response != null && response.IsSuccessStatusCode)
+        {
+           
+        }
+    }
+}
